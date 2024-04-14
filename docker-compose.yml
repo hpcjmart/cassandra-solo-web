@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  cassandra-soloweb:
+    build: ./
+    image: dcagatay/cassandra-web:latest
+    container_name: cassandra-soloweb
+    networks:
+      - soloweb
+    ports:
+      - 4000:3000
+    environment:
+      CASSANDRA_HOST_IPS: 192.168.65.1
+      CASSANDRA_PORT: 9042
+      CASSANDRA_USER: cassandra
+      CASSANDRA_PASSWORD: cassandra
+    restart: unless-stopped
+
+networks:
+  soloweb:
+    name: soloweb
+    driver: bridge
+
